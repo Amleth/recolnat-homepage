@@ -1,0 +1,6 @@
+.idea
+node_modules
+*.log
+*~
+src/root-route.js
+dist

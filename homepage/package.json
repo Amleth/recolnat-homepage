@@ -1,0 +1,34 @@
+{
+  "name": "recolnat-homepage",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp build-dev",
+    "prod": "gulp build-prod",
+    "deploy": "gulp deploy"
+  },
+  "author": "Thomas « Amleth » Bottini",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "git://github.com/babel/babel-loader.git#master",
+    "babel-runtime": "*",
+    "core-js": "git://github.com/zloirock/core-js#master",
+    "css-loader": "git://github.com/webpack/css-loader.git#master",
+    "gulp": "git://github.com/gulpjs/gulp#master",
+    "gulp-rename": "git://github.com/hparra/gulp-rename#master",
+    "gulp-sftp": "git://github.com/gtg092x/gulp-sftp#master",
+    "gulp-shell": "git://github.com/sun-zheng-an/gulp-shell#master",
+    "jsx-loader": "git://github.com/petehunt/jsx-loader.git#master",
+    "lodash": "*",
+    "normalize.css": "*",
+    "react": ">=0.13.1",
+    "react-prefixr": "git://github.com/naman34/react-stylePrefixr#master",
+    "react-router": "0.13.2",
+    "recolnat-style-guide": "git+ssh://dicen-dev@217.70.188.184:/home/dicen-dev/git/recolnat-style-guide#master",
+    "style-loader": "git://github.com/webpack/style-loader.git#master",
+    "url-loader": "git://github.com/webpack/url-loader.git#master",
+    "superagent": "*"
+  }
+}
