@@ -1,3 +1,5 @@
+'use strict';
+
 function YMVDateToDisplayableDate(ymv) {
   var displayDate = "";
   var d = new Date(ymv);

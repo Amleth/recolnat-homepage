@@ -7,7 +7,6 @@ import request from 'superagent';
 import defaultNewsItems from '../text/static-news';
 
 class Newsfeed extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {newsList: null};
@@ -25,7 +24,7 @@ class Newsfeed extends React.Component {
       .set('Accept', 'application/json')
       .end((err, res)=> {
         if (err) {
-          
+
         }
         else {
           this.setState({newsList: JSON.parse(res.text).items});
@@ -37,29 +36,29 @@ class Newsfeed extends React.Component {
     var right = false;
     if (this.state.newsList == null) {
       return <NewsItem title="Veuillez patienter"
-        publicationDate=""
-        imageUrl=""
-        content="Les dernières nouvelles sont en cours de chargement. Veuillez patienter."
-        source={null}
-        align={true}
-      />
+                       publicationDate=""
+                       imageUrl=""
+                       content="Les dernières nouvelles sont en cours de chargement. Veuillez patienter."
+                       source={null}
+                       align={true}
+        />
     }
     else {
       return (
         <ul style={this.listStyle}>
-         {
-           this.state.newsList.map(function(news) {
-             right = !right;
-             return <NewsItem title={news.title}
-               publicationDate={news.date}
-               imageUrl={news.image}
-               content={news.content}
-               source={news.linkToSource}
-                              key={news.linkToSource}
-               align={right}
-             />
-           })
-           }
+          {
+            this.state.newsList.map(function(news) {
+              right = !right;
+              return <NewsItem title={news.title}
+                               publicationDate={news.date}
+                               imageUrl={news.image}
+                               content={news.content}
+                               source={news.linkToSource}
+                               key={news.linkToSource}
+                               align={right}
+                />
+            })
+          }
         </ul>
       );
     }

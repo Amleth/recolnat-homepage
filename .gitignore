@@ -1,0 +1,9 @@
+.idea
+node_modules
+*.log
+*~
+*.iml
+target/
+src/root-route.js
+dist
+dependency-reduced-pom.xml

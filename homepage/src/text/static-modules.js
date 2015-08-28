@@ -10,4 +10,4 @@ module.exports = [
   {
     name: 'Le collaboratoire'
   }
-]
+];

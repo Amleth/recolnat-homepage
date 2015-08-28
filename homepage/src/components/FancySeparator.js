@@ -4,28 +4,32 @@ import React from 'react';
 
 var fancySeparatorUrl = 'http://www.scriptatranslations.com/images/ornament.svg';
 
-var separatorStyle = {
-  boxSizing: 'border-box',
-  marginBottom: '20px',
-  marginTop: '20px',
-  textAlign: 'center',
-  width: '100%'
-};
+class FancySeparator extends React.Component {
+  constructor(props) {
+    super(props);
 
-var imageStyle = {
-  border: '0px none',
-  boxSizing: 'border-box',
-  width: '125px'
-};
+    this.separatorStyle = {
+      boxSizing: 'border-box',
+      marginBottom: '20px',
+      marginTop: '20px',
+      textAlign: 'center',
+      width: '100%'
+    };
 
-var FancySeparator = React.createClass({
-  render: function() {
+    this.imageStyle = {
+      border: '0px none',
+      boxSizing: 'border-box',
+      width: '125px'
+    };
+  }
+
+  render() {
     return (
-      <div style={separatorStyle}>
-        <img src={fancySeparatorUrl} style={imageStyle}/>
+      <div style={this.separatorStyle}>
+        <img src={fancySeparatorUrl} style={this.imageStyle}/>
       </div>
     );
   }
-});
+}
 
 module.exports = FancySeparator;
