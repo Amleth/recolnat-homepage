@@ -21,7 +21,7 @@ module.exports = [
         imageUrl: 'http://lesherbonautes.mnhn.fr/missions/2017031/2027412.jpg',
         title: 'Transcrire les planches',
         subTitle: <span>avec
-          <i>Les Herbonautes</i>
+          <i> Les Herbonautes</i>
         </span>
       }
     ]

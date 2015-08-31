@@ -26,9 +26,6 @@ class Tool extends React.Component {
       minWidth: '70px',
       height: '70px',
       borderRadius: '35px',
-      position: 'relative',
-      top: '50%',
-      transform: 'translateY(-50%)',
       display: 'block',
       WebkitTransition: '0.5s ease 0s',
       transition: 'transform 0.5s ease 0s',
@@ -42,9 +39,6 @@ class Tool extends React.Component {
     };
 
     this.toolDetailStyle = {
-      position: 'relative',
-      top: '50%',
-      transform: 'translateY(-50%)',
       boxSizing: 'border-box'
     };
 
