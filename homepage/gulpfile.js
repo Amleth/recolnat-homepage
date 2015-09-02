@@ -8,7 +8,7 @@ var rename = require('gulp-rename');
 //
 
 gulp.task('build-dev', ['route-root-dev'], shell.task([
-  'webpack-dev-server --devtool eval --progress --colors --content-base build --port 8088'
+  'webpack-dev-server --devtool eval --progress --colors --content-base build --https --port 8088'
 ]));
 
 gulp.task('route-root-dev', function() {

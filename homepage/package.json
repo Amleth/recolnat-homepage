@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-loader": "git://github.com/babel/babel-loader.git#master",
     "babel-runtime": "*",
+    "cookie": "^0.2.0",
     "core-js": "git://github.com/zloirock/core-js#master",
     "css-loader": "git://github.com/webpack/css-loader.git#master",
     "gulp": "git://github.com/gulpjs/gulp#master",
@@ -28,7 +29,8 @@
     "react-router": "0.13.2",
     "recolnat-style-guide": "git+ssh://dicen-dev@217.70.188.184:/home/dicen-dev/git/recolnat-style-guide#master",
     "style-loader": "git://github.com/webpack/style-loader.git#master",
+    "superagent": "*",
     "url-loader": "git://github.com/webpack/url-loader.git#master",
-    "superagent": "*"
+    "xml-parser": "^1.2.1"
   }
 }

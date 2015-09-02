@@ -3,6 +3,9 @@ import React from 'react';
 import defaultAvatarUrl from '../images/defaultAvatar.png';
 import commonStyles from '../styles/common-styles';
 import prefixr from 'react-prefixr';
+import request from "superagent";
+import cookie from "cookie";
+import parse from "xml-parser";
 
 // Import :hover functionalities for user photo from actual stylesheets
 //require('../styles/rotating-photo.css');
@@ -149,14 +152,12 @@ class UserLogin extends React.Component {
 
   // ACTION Handlers
   doLogin() {
-    alert("La version actuelle ne propose qu'un utilisateur par défaut.");
-    // TODO : Check user and password against login service
-    // TODO : Load user avatar image and name
-    this.setState({userLoggedIn: true, userName: this.state.id, userAvatar: defaultAvatarUrl});
+    window.location.replace("https://cas.recolnat.org/login?service=" + [location.protocol, '//', location.host, location.pathname].join(''));
   }
 
   doLogout() {
-    this.setState({userLoggedIn: false});
+    //this.setState({userLoggedIn: false});
+    window.location.replace("https://cas.recolnat.org/logout");
   }
 
   goToUserSpace() {
@@ -164,12 +165,85 @@ class UserLogin extends React.Component {
   }
 
   createNewUser() {
-    alert("Option non disponible dans la version actuelle.");
-    // TODO : Implement this
+    window.location.replace("https://cas.recolnat.org/login?service=" + [location.protocol, '//', location.host, location.pathname].join(''));
   }
 
   rotate() {
     this.setState({rotated: !this.state.rotated});
+  }
+
+  componentDidMount() {
+    // Check cookies for CAS TGT
+    document.domain = "recolnat.org";
+    var cookies = cookie.parse(document.cookie);
+    if(!cookies.CASTGC) {
+      this.setState({userLoggedIn: false});
+      return;
+    }
+    var self = this;
+    // Call CAS service to authenticate TGT and get ST
+    request
+      .post("https://cas.recolnat.org/v1/tickets/" + cookies.CASTGC)
+      .set("Content-Type", "application/x-www-form-urlencoded")
+      .send({service: "http://wp5.recolnat.org"})
+      .end(function(err, res) {
+        if(res.ok) {
+          // Use ST with CAS service to get user id
+          request.post("https://cas.recolnat.org/serviceValidate")
+            .set("Content-Type", "application/json")
+            .query({ ticket: res.xhr.response, service: "http://wp5.recolnat.org" })
+            .end(function(err, res) {
+              if(res.ok) {
+                // Parse response xml to get user id
+                var parsedCASResponse = parse(res.xhr.response);
+                var userData = parsedCASResponse.root.children[0].children;
+                var userName = null;
+                for(var i = 0; i < userData.length; ++i) {
+                  var data = userData[i];
+                  if(data.name == "cas:user") {
+                    userName = data.content;
+                    break;
+                  }
+                }
+                console.log("CAS returned user " + userName);
+                // Get user data from api with user id
+                request.get("https://api.recolnat.org/erecolnat/v1/users/login/" + userName)
+                  .end((err,res) => {
+                    if(res.ok) {
+                      // Update component state
+                      var user = JSON.parse(res.xhr.response);
+                      var avatar = defaultAvatarUrl;
+                      if(user.has_avatar) {
+                        avatar = "data:" + user.avatar.mimetype + ";base64," + user.avatar.data;
+                      }
+                      var userDisplayName = userName;
+                      if(user.firstname && user.lastname) {
+                        userDisplayName = user.firstname[0].toUpperCase() + user.firstname.slice(1)
+                        + " "
+                        + user.lastname[0].toUpperCase() + user.lastname.slice(1);
+                      }
+                      self.setState({userName: userDisplayName,
+                        userLoggedIn: true,
+                        userAvatar: avatar
+                      });
+                    }
+                    else {
+                      console.log("Unable to access user data. " + err);
+                    }
+                  });
+              }
+              else {
+                console.log(res.text);
+                console.log("Error validating ST - " + err);
+              }
+            });
+        }
+        else {
+          console.log(res.text);
+          console.log("Error validating TGT - " + err);
+        }
+      });
+
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -182,6 +256,7 @@ class UserLogin extends React.Component {
       this.userPhotoRotatingPart.transform = 'rotateY(0deg)';
     }
   }
+
   render() {
     if (this.state.userLoggedIn == true) {
       return (
