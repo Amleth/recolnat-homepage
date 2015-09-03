@@ -189,9 +189,10 @@ class UserLogin extends React.Component {
       .end(function(err, res) {
         if(res.ok) {
           // Use ST with CAS service to get user id
+          //var ticket = res.text;
           request.post("https://cas.recolnat.org/serviceValidate")
             .set("Content-Type", "application/json")
-            .query({ ticket: res.xhr.response, service: "http://wp5.recolnat.org" })
+            .query({ ticket: res.text, service: "http://wp5.recolnat.org" })
             .end(function(err, res) {
               if(res.ok) {
                 // Parse response xml to get user id
