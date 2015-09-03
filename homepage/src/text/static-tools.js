@@ -9,7 +9,7 @@ module.exports = [
     key: '1',
     tools: [
       {
-        url: '#',
+        url: 'http://controle.recolnat.org',
         key: '11',
         imageUrl: 'http://botanicallyspeaking.files.wordpress.com/2010/07/cornusherbarium.jpg',
         title: 'Contrôler les scans',
