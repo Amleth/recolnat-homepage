@@ -29,7 +29,7 @@ public class RecolnatHomepageApplication extends Application<RecolnatHomepageCon
 
     @Override
     public void run(RecolnatHomepageConfiguration configuration, Environment environment) {
-        final NewsListResource newsListResource = new NewsListResource();
+        final NewsListResource newsListResource = new NewsListResource(configuration.getSource());
 
         configureCors(environment);
 

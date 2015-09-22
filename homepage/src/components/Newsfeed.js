@@ -20,7 +20,7 @@ class Newsfeed extends React.Component {
 
   componentDidMount() {
     request
-      .get('http://localhost:8080/newslist')
+      .get('https://wp5test.recolnat.org:8888/newslist')
       .set('Accept', 'application/json')
       .end((err, res)=> {
         if (err) {

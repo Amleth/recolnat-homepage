@@ -1,3 +1,4 @@
+source: "http://wp5test.mnhn.fr/blog/?feed=rss2"
 server:
   applicationConnectors:
   - type: http

@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -25,17 +27,12 @@ import com.sun.syndication.io.XmlReader;
 @Produces(MediaType.APPLICATION_JSON)
 public class NewsListResource {
     private final Integer defaultNumberOfNewsItemsToRetrieve = 5;
-    private final String rssFeedUrl = "http://wp5test.mnhn.fr/blog/?feed=rss2";
+    private String rssFeedUrl = "http://wp5test.mnhn.fr/blog/?feed=rss2";
+//    private List<String> rssSources = new ArrayList<String>();
 
-    public NewsListResource() {
-
+    public NewsListResource(String rssSource) {
+        this.rssFeedUrl = rssSource;
     }
-
-//    @GET
-//    @Timed
-//    public NewsList sayHello() {
-//        return new NewsList("Une invasion de castors cosmiques est prévue pour bientôt.");
-//    }
 
     @GET
     @Timed
