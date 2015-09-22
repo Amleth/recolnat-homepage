@@ -78,6 +78,15 @@ class NewsItem extends React.Component {
     }
   }
 
+  displayImage() {
+    if(this.props.imageUrl == null) {
+      return null;
+    }
+    else {
+      return <img style={this.imageStyle} src={this.props.imageUrl} />;
+    }
+  }
+
   render() {
     // TODO Do something witty to convert machine date to human date
     var humanReadablePublicationDate = DateConverter(this.props.publicationDate);
@@ -91,7 +100,7 @@ class NewsItem extends React.Component {
                     dateTime={this.props.publicationDate}>{humanReadablePublicationDate}</time>
             </p>
           </header>
-          <img style={this.imageStyle} src={this.props.imageUrl} />
+          {this.displayImage.bind(this)}
           <span style={this.newsParagraphStyle} dangerouslySetInnerHTML={{__html: this.props.content}} />
         </article>
       </li>

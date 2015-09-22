@@ -35,13 +35,15 @@ class Newsfeed extends React.Component {
   render() {
     var right = false;
     if (this.state.newsList == null) {
-      return <NewsItem title="Veuillez patienter"
+      return <ul style={this.listStyle}>
+        <NewsItem title="Veuillez patienter"
                        publicationDate=""
-                       imageUrl=""
+                       imageUrl={null}
                        content="Les dernières nouvelles sont en cours de chargement. Veuillez patienter."
                        source={null}
                        align={true}
         />
+        </ul>
     }
     else {
       return (
