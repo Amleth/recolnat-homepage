@@ -1,0 +1,17 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 10101
+#  - type: https
+#    port: 10201
+#    keyStorePath: "/home/dmitri/Tools/jdk8/jre/lib/security/cacerts"
+#    keyStorePassword: changeit
+#    validateCerts: false
+  adminConnectors:
+  - type: http
+    port: 10301
+#  - type: https
+#    port: 10401
+#    keyStorePath: "/home/dmitri/Tools/jdk8/jre/lib/security/cacerts"
+#    keyStorePassword: changeit
+#    validateCerts: false
